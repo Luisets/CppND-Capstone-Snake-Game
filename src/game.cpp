@@ -3,10 +3,11 @@
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
-      engine(dev()),
-      random_w(0, static_cast<int>(grid_width - 1)),
-      random_h(0, static_cast<int>(grid_height - 1)) {
+    : snake(grid_width, grid_height)
+    , _scoreboard(Game::SCOREBOARD_PATH)
+    , engine(dev())
+    , random_w(0, static_cast<int>(grid_width - 1))
+    , random_h(0, static_cast<int>(grid_height - 1)) {
   PlaceFood();
 }
 
@@ -85,3 +86,4 @@ void Game::Update() {
 
 int Game::GetScore() const { return score; }
 int Game::GetSize() const { return snake.size; }
+void Game::displayScores() { _scoreboard.displayScoreboard(); }
