@@ -18,7 +18,7 @@ Renderer::Renderer(const std::size_t screen_width,
   // Create Window
   sdl_window = SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED,
                                 SDL_WINDOWPOS_CENTERED, screen_width,
-                                screen_height, SDL_WINDOW_SHOWN);
+                                screen_height, SDL_WINDOW_HIDDEN);
 
   if (nullptr == sdl_window) {
     std::cerr << "Window could not be created.\n";
@@ -78,4 +78,14 @@ void Renderer::Render(Snake const snake, SDL_Point const &food) {
 void Renderer::UpdateWindowTitle(int score, int fps) {
   std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};
   SDL_SetWindowTitle(sdl_window, title.c_str());
+}
+
+void Renderer::showScreen()
+{
+  SDL_ShowWindow(sdl_window);
+}
+
+void Renderer::hideScreem()
+{
+  SDL_HideWindow(sdl_window);
 }

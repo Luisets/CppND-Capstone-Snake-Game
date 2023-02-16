@@ -22,13 +22,12 @@ Scoreboard::~Scoreboard()
 
 void Scoreboard::displayScoreboard()
 {
+    loadScoreBoardFromFile();
     if (_scoresInScoreboard == 0)
     {
         std::cout << "There are not scores to display" << std::endl << std::endl;
         return;
     }
-
-    loadScoreBoardFromFile();
     for(size_t index = 0; index < _scoresInScoreboard; ++index)
     {
         std::cout << index + 1 << ". " << _scores[index].nickname << ": " << _scores[index].score << std::endl;

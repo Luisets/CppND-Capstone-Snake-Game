@@ -11,7 +11,7 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
   PlaceFood();
 }
 
-void Game::Run(Controller const &controller, Renderer &renderer,
+void Game::Run(Renderer &renderer,
                std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
   Uint32 frame_start;
@@ -19,7 +19,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_duration;
   int frame_count = 0;
   bool running = true;
-
+  renderer.showScreen();
   while (running) {
     frame_start = SDL_GetTicks();
 
@@ -48,6 +48,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     if (frame_duration < target_frame_duration) {
       SDL_Delay(target_frame_duration - frame_duration);
     }
+
+    running = snake.alive;
   }
 }
 
@@ -82,6 +84,11 @@ void Game::Update() {
     snake.GrowBody();
     snake.speed += 0.02;
   }
+}
+
+void Game::checkAndUpdateScore()
+{
+  _scoreboard.updateScoreboard()
 }
 
 int Game::GetScore() const { return score; }
