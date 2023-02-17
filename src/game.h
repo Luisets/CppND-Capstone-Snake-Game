@@ -15,6 +15,7 @@ class Game {
   void Run(Renderer &renderer,
            std::size_t target_frame_duration);
   void displayScores();
+  void checkAndUpdateScores();
   int GetScore() const;
   int GetSize() const;
 
@@ -35,7 +36,6 @@ class Game {
 
   void PlaceFood();
   void Update();
-  void checkAndUpdateScores()
 };
 
 #endif

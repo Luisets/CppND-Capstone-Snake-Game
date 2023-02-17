@@ -1,5 +1,6 @@
 #include "scoreboard.h"
 #include <fstream>
+#include <cstring>
 #include <iostream>
 
 
@@ -23,6 +24,7 @@ Scoreboard::~Scoreboard()
 void Scoreboard::displayScoreboard()
 {
     loadScoreBoardFromFile();
+    std::cout << "---- Scoreboard ----" << std::endl;
     if (_scoresInScoreboard == 0)
     {
         std::cout << "There are not scores to display" << std::endl << std::endl;
@@ -32,33 +34,38 @@ void Scoreboard::displayScoreboard()
     {
         std::cout << index + 1 << ". " << _scores[index].nickname << ": " << _scores[index].score << std::endl;
     }
-    std::cout << std::endl;
 }
 
-void Scoreboard::updateScoreboard(score_entry newScore)
+void Scoreboard::updateScoreboard(unsigned long newScore)
 {
     loadScoreBoardFromFile();
     size_t index;
     for (index = 0; (index < _scoresInScoreboard); ++index)
     {
-        if(newScore.score > _scores[index].score)
+        if(newScore > _scores[index].score)
         {
             break;
         }
     }
-    if ((index < MAX_SCORES)
-        && (index < _scoresInScoreboard))
+    if (index >= MAX_SCORES)
     {
-        shiftRightScoreboard(index, std::move(newScore));
-        _scoresInScoreboard = std::min(_scoresInScoreboard + 1, MAX_SCORES);
-        saveScoreboard();
+        return;
     }
-    else if (index < MAX_SCORES)
+    std::cout << "¡¡ Nice played dear gamer, you are worthy of being on the scoreboard !!" << std::endl;
+    score_entry newScoreEntry;
+    newScoreEntry.score = newScore;
+    getUserNickname(newScoreEntry.nickname);
+
+    if (index < _scoresInScoreboard)
     {
-        _scores[index] = std::move(newScore);
-        _scoresInScoreboard = std::min(_scoresInScoreboard + 1, MAX_SCORES);
-        saveScoreboard();
+        shiftRightScoreboard(index, std::move(newScoreEntry));
     }
+    else
+    {
+        _scores[index] = std::move(newScoreEntry);
+    }
+    _scoresInScoreboard = std::min(_scoresInScoreboard + 1, MAX_SCORES);
+    saveScoreboard();
 }
 
 void Scoreboard::loadScoreBoardFromFile()
@@ -112,4 +119,14 @@ void Scoreboard::shiftRightScoreboard(size_t index, score_entry &&score)
         _scores[i] = std::move(_scores[i - 1]);
     }
     _scores[i] = score;
+}
+
+void Scoreboard::getUserNickname(char *nickname)
+{
+    std::string nick;
+    std::cout << "Insert your Nick without spaces (Max 10 characteres): ";
+    std::cin >> nick;
+    std::memset(nickname, 0, MAX_NICK_SIZE + 1);
+    nick.copy(nickname, MAX_NICK_SIZE);
+    nickname[MAX_NICK_SIZE] = '\0';
 }

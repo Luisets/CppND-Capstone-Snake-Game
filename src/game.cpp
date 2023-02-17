@@ -86,9 +86,9 @@ void Game::Update() {
   }
 }
 
-void Game::checkAndUpdateScore()
+void Game::checkAndUpdateScores()
 {
-  _scoreboard.updateScoreboard()
+  _scoreboard.updateScoreboard(score);
 }
 
 int Game::GetScore() const { return score; }

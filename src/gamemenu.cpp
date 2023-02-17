@@ -34,18 +34,18 @@ void GameMenu::run()
         default:
             break;
         }
-    } while (userSelection != Option::Play
-            && userSelection != Option::Exit);
+    } while (userSelection != Option::Exit);
     
 }
 
 void GameMenu::displayMenu()
 {
-  std::cout << "\t---- Options menu ----" << std::endl;
-  std::cout << "\t 1.- Play" << std::endl;
-  std::cout << "\t 2.- Scoreboar" << std::endl;
-  std::cout << "\t 3.- Exit" << std::endl;
-  std::cout << "\t 3.- Test scoreboard" << std::endl;
+    std::cout << std::endl;
+    std::cout << "\t---- Options menu ----" << std::endl;
+    std::cout << "\t 1.- Play" << std::endl;
+    std::cout << "\t 2.- Scoreboar" << std::endl;
+    std::cout << "\t 3.- Exit" << std::endl;
+    std::cout << "\t 3.- Test scoreboard" << std::endl;
 }
 
 Option GameMenu::getUserSelection()
@@ -55,6 +55,8 @@ Option GameMenu::getUserSelection()
         std::cout << "Enter your choice (1-" << N_OPTIONS << "): ";
         std::cin >> choice;
     }
+    std::cin.clear();
+    std::cout << std::endl;
     return static_cast<Option>(choice);
 }
 
@@ -67,4 +69,5 @@ void GameMenu::launchGame()
     std::cout << "Game has terminated successfully!" << std::endl;
     std::cout << "Score: " << _game.GetScore() << std::endl;
     std::cout << "Size: " << _game.GetSize() << std::endl;
+    _game.checkAndUpdateScores();
 }
