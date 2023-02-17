@@ -12,6 +12,7 @@
 class Game {
  public:
   Game(std::size_t grid_width, std::size_t grid_height);
+  void initialize();
   void Run(Renderer &renderer,
            std::size_t target_frame_duration);
   void displayScores();
@@ -32,7 +33,7 @@ class Game {
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
 
-  int score{0};
+  int _score{0};
 
   void PlaceFood();
   void Update();

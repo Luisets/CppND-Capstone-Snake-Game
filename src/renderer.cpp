@@ -85,7 +85,7 @@ void Renderer::showScreen()
   SDL_ShowWindow(sdl_window);
 }
 
-void Renderer::hideScreem()
+void Renderer::hideScreen()
 {
   SDL_HideWindow(sdl_window);
 }

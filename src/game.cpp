@@ -10,7 +10,11 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
     , random_h(0, static_cast<int>(grid_height - 1)) {
   PlaceFood();
 }
-
+void Game::initialize()
+{
+  snake.initialize();
+  _score = 0;
+}
 void Game::Run(Renderer &renderer,
                std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
@@ -37,7 +41,7 @@ void Game::Run(Renderer &renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count);
+      renderer.UpdateWindowTitle(_score, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -51,6 +55,7 @@ void Game::Run(Renderer &renderer,
 
     running = snake.alive;
   }
+  renderer.hideScreen();
 }
 
 void Game::PlaceFood() {
@@ -78,7 +83,7 @@ void Game::Update() {
 
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
-    score++;
+    _score++;
     PlaceFood();
     // Grow snake and increase speed.
     snake.GrowBody();
@@ -88,9 +93,9 @@ void Game::Update() {
 
 void Game::checkAndUpdateScores()
 {
-  _scoreboard.updateScoreboard(score);
+  _scoreboard.updateScoreboard(_score);
 }
 
-int Game::GetScore() const { return score; }
+int Game::GetScore() const { return _score; }
 int Game::GetSize() const { return snake.size; }
 void Game::displayScores() { _scoreboard.displayScoreboard(); }

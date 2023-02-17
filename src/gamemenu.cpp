@@ -64,7 +64,7 @@ void GameMenu::launchGame()
 {
     constexpr std::size_t kFramesPerSecond{60};
     constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
-
+    _game.initialize();
     _game.Run(_renderer, kMsPerFrame);
     std::cout << "Game has terminated successfully!" << std::endl;
     std::cout << "Score: " << _game.GetScore() << std::endl;
