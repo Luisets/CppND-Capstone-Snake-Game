@@ -21,10 +21,10 @@ class Game {
   int GetSize() const;
 
  private:
-  Snake snake;
-  Controller controller;
+  Snake _snake;
+  Controller _controller;
   Scoreboard _scoreboard;
-  SDL_Point food;
+  SDL_Point _food;
 
   static constexpr char SCOREBOARD_PATH[] = "./scoreboard";
 
