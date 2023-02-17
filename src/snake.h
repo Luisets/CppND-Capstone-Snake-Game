@@ -6,7 +6,7 @@
 
 class Snake {
  public:
-  enum class Direction { kUp, kDown, kLeft, kRight };
+  enum class Direction { kUp, kDown, kLeft, kRight, kNone };
 
   Snake(int grid_width, int grid_height);
 
@@ -29,7 +29,7 @@ class Snake {
   void UpdateHead();
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
-  Direction _direction = Direction::kUp;
+  Direction _direction = Direction::kNone;
   std::vector<SDL_Point> _body;
   
   bool _alive{true};
