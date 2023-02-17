@@ -1,15 +1,13 @@
 #include <iostream>
 
+#include "game.h"
 #include "gamemenu.h"
 #include "renderer.h"
-#include "game.h"
 
 GameMenu::GameMenu(Game &game, Renderer &renderer)
     : _game(game)
     , _renderer(renderer)
-
 {
-
 }
 
 void GameMenu::run()
@@ -35,7 +33,6 @@ void GameMenu::run()
             break;
         }
     } while (userSelection != Option::Exit);
-    
 }
 
 void GameMenu::displayMenu()
@@ -51,7 +48,8 @@ void GameMenu::displayMenu()
 Option GameMenu::getUserSelection()
 {
     int choice = 0;
-    while (choice < 1 || choice > N_OPTIONS ) {
+    while (choice < 1 || choice > N_OPTIONS)
+    {
         std::cout << "Enter your choice (1-" << N_OPTIONS << "): ";
         std::cin >> choice;
     }

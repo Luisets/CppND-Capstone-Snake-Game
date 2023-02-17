@@ -1,14 +1,15 @@
-#include <iostream>
-#include <cstring>
 #include "controller.h"
-#include "gamemenu.h"
 #include "game.h"
+#include "gamemenu.h"
 #include "renderer.h"
 #include "scoreboard.h"
+#include <cstring>
+#include <iostream>
 
 // #define SCOREBOARD_PATH "./scoreboard"
 
-int main() {
+int main()
+{
   constexpr std::size_t kScreenWidth{640};
   constexpr std::size_t kScreenHeight{640};
   constexpr std::size_t kGridWidth{32};

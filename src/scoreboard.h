@@ -1,8 +1,8 @@
 #ifndef SCOREBOARD_H
 #define SCOREBOARD_H
 
-#include <string>
 #include <array>
+#include <string>
 
 struct score_entry
 {
@@ -17,6 +17,7 @@ public:
     ~Scoreboard();
     void displayScoreboard();
     void updateScoreboard(unsigned long newScore);
+
 private:
     static constexpr size_t MAX_SCORES = 5;
     static constexpr size_t MAX_NICK_SIZE = 10;

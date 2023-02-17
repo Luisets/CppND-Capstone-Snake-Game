@@ -1,16 +1,17 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <string>
-#include <random>
 #include "SDL.h"
 #include "controller.h"
 #include "renderer.h"
 #include "scoreboard.h"
 #include "snake.h"
+#include <random>
+#include <string>
 
-class Game {
- public:
+class Game
+{
+public:
   Game(std::size_t grid_width, std::size_t grid_height);
   void initialize();
   void Run(Renderer &renderer,
@@ -20,7 +21,7 @@ class Game {
   int GetScore() const;
   int GetSize() const;
 
- private:
+private:
   Snake _snake;
   Controller _controller;
   Scoreboard _scoreboard;

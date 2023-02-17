@@ -17,6 +17,7 @@ class GameMenu
 public:
     GameMenu(Game &game, Renderer &renderer);
     void run();
+
 private:
     Game &_game;
     Renderer &_renderer;

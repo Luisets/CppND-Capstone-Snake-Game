@@ -1,8 +1,7 @@
 #include "scoreboard.h"
-#include <fstream>
 #include <cstring>
+#include <fstream>
 #include <iostream>
-
 
 Scoreboard::Scoreboard(std::string filename)
     : _filename(filename)
@@ -27,10 +26,11 @@ void Scoreboard::displayScoreboard()
     std::cout << "---- Scoreboard ----" << std::endl;
     if (_scoresInScoreboard == 0)
     {
-        std::cout << "There are not scores to display" << std::endl << std::endl;
+        std::cout << "There are not scores to display" << std::endl
+                  << std::endl;
         return;
     }
-    for(size_t index = 0; index < _scoresInScoreboard; ++index)
+    for (size_t index = 0; index < _scoresInScoreboard; ++index)
     {
         std::cout << index + 1 << ". " << _scores[index].nickname << ": " << _scores[index].score << std::endl;
     }
@@ -42,7 +42,7 @@ void Scoreboard::updateScoreboard(unsigned long newScore)
     size_t index;
     for (index = 0; (index < _scoresInScoreboard); ++index)
     {
-        if(newScore > _scores[index].score)
+        if (newScore > _scores[index].score)
         {
             break;
         }
@@ -92,13 +92,13 @@ void Scoreboard::loadScoreBoardFromFile()
 
 /**
  * Save the current scoreboard in _filename.
-*/
+ */
 void Scoreboard::saveScoreboard()
 {
     std::fstream fileStream;
     fileStream.open(_filename, std::ios_base::out | std::ios_base::trunc);
 
-    for(size_t i = 0; i < _scoresInScoreboard; i++)
+    for (size_t i = 0; i < _scoresInScoreboard; i++)
     {
         fileStream.write(reinterpret_cast<char *>(&_scores[i]), sizeof(score_entry));
     }
@@ -110,11 +110,11 @@ void Scoreboard::saveScoreboard()
  *  if the array is full, the last element will be deleted.
  *  i.e. our array is {['Luis', 50], ['Maria', 30], ['Jose', 20], ['Jose', 15], ['Sara', 10]}. index = 1 and score = ['Carlos', 40]
  *  result  {['Luis', 50], ['Carlos', 40], ['Maria', 30], ['Jose', 20], ['Jose', 15]}
-*/
+ */
 void Scoreboard::shiftRightScoreboard(size_t index, score_entry &&score)
 {
     size_t i = std::min(_scoresInScoreboard, MAX_SCORES - 1);
-    for(i; (i > index); --i)
+    for (i; (i > index); --i)
     {
         _scores[i] = std::move(_scores[i - 1]);
     }
