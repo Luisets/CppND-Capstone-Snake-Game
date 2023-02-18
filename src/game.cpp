@@ -41,8 +41,8 @@ void Game::run(Renderer &renderer,
     // Update screen
     renderer.cleanScreen();
     drawFood(renderer);
-    _snake.render(renderer);
-    _obstacle.render(renderer);
+    _snake.draw(renderer);
+    _obstacle.draw(renderer);
     renderer.updateScreen();
 
     frame_end = SDL_GetTicks();

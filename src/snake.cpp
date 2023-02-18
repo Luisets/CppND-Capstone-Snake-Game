@@ -124,7 +124,7 @@ void Snake::checkCollision(const std::vector<SDL_Point> &points)
   }
 }
 
-void Snake::render(Renderer &renderer)
+void Snake::draw(Renderer &renderer)
 {
   SDL_Rect block;
   std::tie(block.w, block.h) = renderer.getBlockDimentions();

@@ -20,7 +20,7 @@ Obstacle::~Obstacle()
 {
 }
 
-void Obstacle::render(Renderer &renderer)
+void Obstacle::draw(Renderer &renderer)
 {
     SDL_Rect block;
     std::tie(block.w, block.h) = renderer.getBlockDimentions();

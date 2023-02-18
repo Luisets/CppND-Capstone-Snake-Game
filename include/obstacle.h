@@ -4,14 +4,14 @@
 
 #include <vector>
 #include "SDL2/SDL.h"
-#include "renderableObject.h"
+#include "drawableObject.h"
 
-class Obstacle : virtual public RenderableObject
+class Obstacle : virtual public DrawableObject
 {
 public:
     Obstacle(int grid_width, int grid_height);
     ~Obstacle();
-    void render(Renderer &renderer) override;
+    void draw(Renderer &renderer) override;
 
     const std::vector<SDL_Point> &getPoints() const { return _coordinates; };
 
