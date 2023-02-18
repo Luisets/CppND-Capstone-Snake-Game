@@ -19,11 +19,11 @@ public:
   Snake(int grid_width, int grid_height);
 
   void initialize();
-  void Update();
+  void update();
 
-  void GrowBody();
+  void growBody();
   void speedUp();
-  bool SnakeCell(int x, int y);
+  bool snakeCell(int x, int y);
 
   inline Direction getDirection() const { return _direction; }
   inline float getHead_x() const { return _head_x; }
@@ -34,8 +34,8 @@ public:
   inline void setDirection(const Direction direction) { _direction = direction; }
 
 private:
-  void UpdateHead();
-  void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
+  void updateHead();
+  void updateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
   Direction _direction = Direction::kNone;
   std::vector<SDL_Point> _body;

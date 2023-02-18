@@ -14,12 +14,12 @@ class Game
 public:
   Game(std::size_t grid_width, std::size_t grid_height);
   void initialize();
-  void Run(Renderer &renderer,
+  void run(Renderer &renderer,
            std::size_t target_frame_duration);
   void displayScores();
   void checkAndUpdateScores();
-  int GetScore() const;
-  int GetSize() const;
+  int getScore() const;
+  int getSize() const;
 
 private:
   Snake _snake;
@@ -36,8 +36,8 @@ private:
 
   int _score{0};
 
-  void PlaceFood();
-  void Update();
+  void placeFood();
+  void update();
 };
 
 #endif

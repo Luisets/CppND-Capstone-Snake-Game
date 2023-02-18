@@ -3,7 +3,7 @@
 #include "snake.h"
 #include <iostream>
 
-void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
+void Controller::changeDirection(Snake &snake, Snake::Direction input,
                                  Snake::Direction opposite) const
 {
   if (snake.getDirection() != opposite || snake.getSize() == 1)
@@ -12,7 +12,7 @@ void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
   }
 }
 
-void Controller::HandleInput(bool &running, Snake &snake) const
+void Controller::handleInput(bool &running, Snake &snake) const
 {
   SDL_Event e;
   while (SDL_PollEvent(&e))
@@ -26,22 +26,22 @@ void Controller::HandleInput(bool &running, Snake &snake) const
       switch (e.key.keysym.sym)
       {
       case SDLK_UP:
-        ChangeDirection(snake, Snake::Direction::kUp,
+        changeDirection(snake, Snake::Direction::kUp,
                         Snake::Direction::kDown);
         break;
 
       case SDLK_DOWN:
-        ChangeDirection(snake, Snake::Direction::kDown,
+        changeDirection(snake, Snake::Direction::kDown,
                         Snake::Direction::kUp);
         break;
 
       case SDLK_LEFT:
-        ChangeDirection(snake, Snake::Direction::kLeft,
+        changeDirection(snake, Snake::Direction::kLeft,
                         Snake::Direction::kRight);
         break;
 
       case SDLK_RIGHT:
-        ChangeDirection(snake, Snake::Direction::kRight,
+        changeDirection(snake, Snake::Direction::kRight,
                         Snake::Direction::kLeft);
         break;
       }

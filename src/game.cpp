@@ -9,14 +9,14 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
     , random_w(0, static_cast<int>(grid_width - 1))
     , random_h(0, static_cast<int>(grid_height - 1))
 {
-  PlaceFood();
+  placeFood();
 }
 void Game::initialize()
 {
   _snake.initialize();
   _score = 0;
 }
-void Game::Run(Renderer &renderer,
+void Game::run(Renderer &renderer,
                std::size_t target_frame_duration)
 {
   Uint32 title_timestamp = SDL_GetTicks();
@@ -31,9 +31,9 @@ void Game::Run(Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    _controller.HandleInput(running, _snake);
-    Update();
-    renderer.Render(_snake, _food);
+    _controller.handleInput(running, _snake);
+    update();
+    renderer.render(_snake, _food);
 
     frame_end = SDL_GetTicks();
 
@@ -45,7 +45,7 @@ void Game::Run(Renderer &renderer,
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000)
     {
-      renderer.UpdateWindowTitle(_score, frame_count);
+      renderer.updateWindowTitle(_score, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -63,16 +63,16 @@ void Game::Run(Renderer &renderer,
   renderer.hideScreen();
 }
 
-void Game::PlaceFood()
+void Game::placeFood()
 {
   int x, y;
   while (true)
   {
     x = random_w(engine);
     y = random_h(engine);
-    // Check that the location is not occupied by a _snake item before placing
-    // _food.
-    if (!_snake.SnakeCell(x, y))
+    // Check that the location is not occupied by a snake item before placing
+    // food.
+    if (!_snake.snakeCell(x, y))
     {
       _food.x = x;
       _food.y = y;
@@ -81,23 +81,23 @@ void Game::PlaceFood()
   }
 }
 
-void Game::Update()
+void Game::update()
 {
   if (!_snake.isAlive())
     return;
 
-  _snake.Update();
+  _snake.update();
 
   int new_x = static_cast<int>(_snake.getHead_x());
   int new_y = static_cast<int>(_snake.getHead_y());
 
-  // Check if there's _food over here
+  // Check if there's food over here
   if (_food.x == new_x && _food.y == new_y)
   {
     _score++;
-    PlaceFood();
-    // Grow _snake and increase speed.
-    _snake.GrowBody();
+    placeFood();
+    // Grow snake and increase speed.
+    _snake.growBody();
     _snake.speedUp();
   }
 }
@@ -107,6 +107,6 @@ void Game::checkAndUpdateScores()
   _scoreboard.updateScoreboard(_score);
 }
 
-int Game::GetScore() const { return _score; }
-int Game::GetSize() const { return _snake.getSize(); }
+int Game::getScore() const { return _score; }
+int Game::getSize() const { return _snake.getSize(); }
 void Game::displayScores() { _scoreboard.displayScoreboard(); }
