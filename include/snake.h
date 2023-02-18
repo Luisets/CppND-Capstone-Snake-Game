@@ -6,6 +6,7 @@
 #include "enums.h"
 #include "drawableObject.h"
 
+#define SPEED_LIMIT 0.5F
 class Snake : public virtual DrawableObject
 {
 public:

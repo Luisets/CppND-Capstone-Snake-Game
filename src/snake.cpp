@@ -154,5 +154,5 @@ void Snake::draw(Renderer &renderer)
 
 void Snake::speedUp()
 {
-  _speed += 0.02;
+  _speed = std::min(_speed + 0.02F, SPEED_LIMIT);
 }
