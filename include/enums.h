@@ -2,10 +2,16 @@
 #define ENUNS_H
 enum class Option : unsigned int
 {
-    Play = 1,
-    ShowScores = 2,
-    Exit = 3,
-    TestScoreboard = 4
+    PlayEasyMode = 1,
+    PlayHardMode = 2,
+    ShowScores = 3,
+    Exit = 4,
+};
+
+enum class Difficulty : int
+{
+    Easy = 1,
+    Normal = 3
 };
 
 enum class SnakeDirection

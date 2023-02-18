@@ -2,16 +2,17 @@
 
 #define OBSTACLE_H
 
-#include <vector>
 #include "SDL2/SDL.h"
 #include "drawableObject.h"
+#include "enums.h"
+#include <vector>
 
 class Obstacle : virtual public DrawableObject
 {
 public:
     Obstacle(int grid_width, int grid_height);
-    ~Obstacle();
     void draw(Renderer &renderer) override;
+    void loadObstacles(Difficulty difficulty);
 
     const std::vector<SDL_Point> &getPoints() const { return _coordinates; };
 

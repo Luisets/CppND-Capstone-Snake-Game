@@ -15,6 +15,7 @@ class Game
 public:
   Game(std::size_t grid_width, std::size_t grid_height);
   void initialize();
+  void setDifficulty(Difficulty difficulty);
   void run(Renderer &renderer,
            std::size_t target_frame_duration);
   void displayScores();
@@ -27,6 +28,7 @@ private:
   Obstacle _obstacle;
   Controller _controller;
   Scoreboard _scoreboard;
+  Difficulty _difficulty;
   SDL_Point _food;
 
   static constexpr char SCOREBOARD_PATH[] = "./scoreboard";

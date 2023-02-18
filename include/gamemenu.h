@@ -17,7 +17,7 @@ private:
     Renderer &_renderer;
 
     void displayMenu();
-    void launchGame();
+    void launchGame(Difficulty difficulty);
     Option getUserSelection();
 };
 

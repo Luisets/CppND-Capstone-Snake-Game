@@ -16,8 +16,15 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
 void Game::initialize()
 {
   _snake.initialize();
+  _difficulty = Difficulty::Easy;
   _score = 0;
 }
+
+void Game::setDifficulty(Difficulty difficulty)
+{
+  _difficulty = difficulty;
+}
+
 void Game::run(Renderer &renderer,
                std::size_t target_frame_duration)
 {
@@ -27,6 +34,7 @@ void Game::run(Renderer &renderer,
   Uint32 frame_duration;
   int frame_count = 0;
   bool running = true;
+  _obstacle.loadObstacles(_difficulty);
   renderer.showScreen();
   while (running)
   {
@@ -116,7 +124,7 @@ void Game::update()
   // Check if there's food over here
   if (_food.x == new_x && _food.y == new_y)
   {
-    _score++;
+    _score += static_cast<int>(_difficulty);
     placeFood();
     // Grow snake and increase speed.
     _snake.growBody();

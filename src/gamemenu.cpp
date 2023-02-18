@@ -19,15 +19,16 @@ void GameMenu::run()
         userSelection = getUserSelection();
         switch (userSelection)
         {
-        case Option::Play:
-            launchGame();
+        case Option::PlayEasyMode:
+            launchGame(Difficulty::Easy);
+            break;
+        case Option::PlayHardMode:
+            launchGame(Difficulty::Normal);
             break;
         case Option::ShowScores:
             _game.displayScores();
             break;
         case Option::Exit:
-            break;
-        case Option::TestScoreboard:
             break;
         default:
             break;
@@ -39,10 +40,10 @@ void GameMenu::displayMenu()
 {
     std::cout << std::endl;
     std::cout << "\t---- Options menu ----" << std::endl;
-    std::cout << "\t 1.- Play" << std::endl;
-    std::cout << "\t 2.- Scoreboar" << std::endl;
-    std::cout << "\t 3.- Exit" << std::endl;
-    std::cout << "\t 3.- Test scoreboard" << std::endl;
+    std::cout << "\t 1.- Play easy mode" << std::endl;
+    std::cout << "\t 2.- Play normal mode" << std::endl;
+    std::cout << "\t 3.- Scoreboar" << std::endl;
+    std::cout << "\t 4.- Exit" << std::endl;
 }
 
 Option GameMenu::getUserSelection()
@@ -58,11 +59,12 @@ Option GameMenu::getUserSelection()
     return static_cast<Option>(choice);
 }
 
-void GameMenu::launchGame()
+void GameMenu::launchGame(Difficulty difficulty)
 {
     constexpr std::size_t kFramesPerSecond{60};
     constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
     _game.initialize();
+    _game.setDifficulty(difficulty);
     _game.run(_renderer, kMsPerFrame);
     std::cout << "Game has terminated successfully!" << std::endl;
     std::cout << "Score: " << _game.getScore() << std::endl;
