@@ -135,7 +135,7 @@ void Snake::draw(Renderer &renderer)
   {
     block.x = point.x * block.w;
     block.y = point.y * block.h;
-    renderer.render(block);
+    renderer.drawBlock(block);
   }
 
   // Render snake's head
@@ -149,7 +149,7 @@ void Snake::draw(Renderer &renderer)
   {
     renderer.setBrushColor(BrushColor::SnakeHeadDead);
   }
-  renderer.render(block);
+  renderer.drawBlock(block);
 }
 
 void Snake::speedUp()

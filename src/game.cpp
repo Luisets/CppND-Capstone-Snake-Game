@@ -43,11 +43,11 @@ void Game::run(Renderer &renderer,
     drawFood(renderer);
     _snake.draw(renderer);
     _obstacle.draw(renderer);
-    renderer.updateScreen();
+    renderer.renderScreen();
 
     frame_end = SDL_GetTicks();
 
-    // Keep track of how long each loop through the input/update/render cycle
+    // Keep track of how long each loop through the input/update/drawBlock cycle
     // takes.
     frame_count++;
     frame_duration = frame_end - frame_start;
@@ -81,7 +81,7 @@ void Game::drawFood(Renderer &renderer)
   renderer.setBrushColor(BrushColor::Food);
   block.x = _food.x * block.w;
   block.y = _food.y * block.h;
-  renderer.render(block);
+  renderer.drawBlock(block);
 }
 
 void Game::placeFood()

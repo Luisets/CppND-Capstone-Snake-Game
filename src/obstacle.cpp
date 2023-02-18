@@ -13,6 +13,15 @@ Obstacle::Obstacle(int grid_width, int grid_height)
         coordinate.y = 15;
         _coordinates.emplace_back(coordinate);
     }
+
+    for(int i = 8; i < 24; ++i)
+    {
+        coordinate.x = 12;
+        coordinate.y = i;
+        _coordinates.emplace_back(coordinate);
+    }
+
+
     
 }
 
@@ -29,6 +38,6 @@ void Obstacle::draw(Renderer &renderer)
     {
         block.x = point.x * block.w;
         block.y = point.y * block.h;
-        renderer.render(block);
+        renderer.drawBlock(block);
     }
 }

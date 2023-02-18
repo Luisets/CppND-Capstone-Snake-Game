@@ -15,8 +15,8 @@ public:
 
   void updateWindowTitle(int score, int fps);
   void cleanScreen();
-  void updateScreen();
-  void render(SDL_Rect &block);
+  void renderScreen();
+  void drawBlock(SDL_Rect &block);
   void setBrushColor(const BrushColor color);
   void showScreen();
   void hideScreen();

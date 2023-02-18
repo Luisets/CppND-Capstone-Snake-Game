@@ -50,7 +50,7 @@ void Renderer::cleanScreen()
   SDL_RenderClear(_sdl_renderer);
 }
 
-void Renderer::render(SDL_Rect &block)
+void Renderer::drawBlock(SDL_Rect &block)
 {
   SDL_RenderFillRect(_sdl_renderer, &block);
 }
@@ -82,7 +82,7 @@ void Renderer::setBrushColor(const BrushColor color)
   }
 }
 
-void Renderer::updateScreen()
+void Renderer::renderScreen()
 {
   SDL_RenderPresent(_sdl_renderer);
 }
