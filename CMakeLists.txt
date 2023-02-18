@@ -12,7 +12,6 @@ project(SDL2Test)
 
 
 find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS} src)
 
 include_directories(include)
 
@@ -25,5 +24,4 @@ set(PROJECT_SOURCES
 )
 
 add_executable(SnakeGame ${PROJECT_SOURCES})
-string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
 target_link_libraries(SnakeGame ${SDL2_LIBRARIES})

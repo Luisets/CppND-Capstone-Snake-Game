@@ -1,7 +1,7 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#include "SDL.h"
+#include <SDL2/SDL.h>
 #include <vector>
 
 class Snake
