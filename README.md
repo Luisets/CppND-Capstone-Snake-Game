@@ -54,13 +54,13 @@ This class is responsible of managing the user inputs in the game screen.
   The project uses three different control strucures. std::array to store and sort the scores in the scoreboard, std::vector to store and loop through reference points of the objects in the screen, and std::pair to encapsulate the height and width of a block in the screen.   Also the code is organized into functions.
   2. *The project reads data from a file and process the data, or the program writes data to a file:*
   The project reads and writes a file to load and save the best scores. This can be found in Scoreboard class definition. loadScoreBoardFromFile (read file) and saveScoreboard (writte file).
-3. *The project accepts user input and processes the input:*
-  The project accept two different user inputs:
-    * First. option inputs to select what the program will do (play game, show scores or exit). This can be found in GameMenu class definition. getUserSelection
-    * Second. Nick of a user when a new score will be recorded in the scoreboard.
-    This can be found in ScoreBoard class. getUserNickname
-    * Third. Arrow inputs to change the direction of the snake.
-    This can be found in Controller class definition. handleInput
+  3. *The project accepts user input and processes the input:*
+    The project accept two different user inputs:
+      * First. option inputs to select what the program will do (play game, show scores or exit). This can be found in GameMenu class definition. getUserSelection
+      * Second. Nick of a user when a new score will be recorded in the scoreboard.
+      This can be found in ScoreBoard class. getUserNickname
+      * Third. Arrow inputs to change the direction of the snake.
+      This can be found in Controller class definition. handleInput
 * Object Oriented Programming
   1. *The project uses Object Oriented Programming techniques:* 
   The project is organized into different classes to hold data and permorm tasks.
