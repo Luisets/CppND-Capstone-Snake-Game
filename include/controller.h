@@ -9,8 +9,8 @@ public:
     void handleInput(bool &running, Snake &snake) const;
 
 private:
-    void changeDirection(Snake &snake, Snake::Direction input,
-                         Snake::Direction opposite) const;
+    void changeDirection(Snake &snake, SnakeDirection input,
+                         SnakeDirection opposite) const;
 };
 
 #endif

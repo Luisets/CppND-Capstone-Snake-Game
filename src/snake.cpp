@@ -12,7 +12,7 @@ Snake::Snake(int grid_width, int grid_height)
 
 void Snake::initialize()
 {
-  _direction = Direction::kNone;
+  _direction = SnakeDirection::kNone;
   _head_x = _grid_width / 2;
   _head_y = _grid_height / 2;
   _speed = 0.1;
@@ -44,23 +44,23 @@ void Snake::updateHead()
 {
   switch (_direction)
   {
-  case Direction::kUp:
+  case SnakeDirection::kUp:
     _head_y -= _speed;
     break;
 
-  case Direction::kDown:
+  case SnakeDirection::kDown:
     _head_y += _speed;
     break;
 
-  case Direction::kLeft:
+  case SnakeDirection::kLeft:
     _head_x -= _speed;
     break;
 
-  case Direction::kRight:
+  case SnakeDirection::kRight:
     _head_x += _speed;
     break;
 
-  case Direction::kNone:
+  case SnakeDirection::kNone:
     break;
   }
 

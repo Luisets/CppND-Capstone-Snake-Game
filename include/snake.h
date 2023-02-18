@@ -3,19 +3,11 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
+#include "enums.h"
 
 class Snake
 {
 public:
-  enum class Direction
-  {
-    kUp,
-    kDown,
-    kLeft,
-    kRight,
-    kNone
-  };
-
   Snake(int grid_width, int grid_height);
 
   void initialize();
@@ -25,19 +17,19 @@ public:
   void speedUp();
   bool snakeCell(int x, int y);
 
-  inline Direction getDirection() const { return _direction; }
+  inline SnakeDirection getDirection() const { return _direction; }
   inline float getHead_x() const { return _head_x; }
   inline float getHead_y() const { return _head_y; }
   inline int getSize() const { return _size; }
   inline const std::vector<SDL_Point> &getBody() const { return _body; }
   inline bool isAlive() const { return _alive; }
-  inline void setDirection(const Direction direction) { _direction = direction; }
+  inline void setDirection(const SnakeDirection direction) { _direction = direction; }
 
 private:
   void updateHead();
   void updateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
-  Direction _direction = Direction::kNone;
+  SnakeDirection _direction = SnakeDirection::kNone;
   std::vector<SDL_Point> _body;
 
   bool _alive{true};

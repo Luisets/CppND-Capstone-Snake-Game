@@ -1,10 +1,11 @@
 #include "controller.h"
-#include <SDL2/SDL.h>
+#include "enums.h"
 #include "snake.h"
+#include <SDL2/SDL.h>
 #include <iostream>
 
-void Controller::changeDirection(Snake &snake, Snake::Direction input,
-                                 Snake::Direction opposite) const
+void Controller::changeDirection(Snake &snake, SnakeDirection input,
+                                 SnakeDirection opposite) const
 {
   if (snake.getDirection() != opposite || snake.getSize() == 1)
   {
@@ -26,23 +27,23 @@ void Controller::handleInput(bool &running, Snake &snake) const
       switch (e.key.keysym.sym)
       {
       case SDLK_UP:
-        changeDirection(snake, Snake::Direction::kUp,
-                        Snake::Direction::kDown);
+        changeDirection(snake, SnakeDirection::kUp,
+                        SnakeDirection::kDown);
         break;
 
       case SDLK_DOWN:
-        changeDirection(snake, Snake::Direction::kDown,
-                        Snake::Direction::kUp);
+        changeDirection(snake, SnakeDirection::kDown,
+                        SnakeDirection::kUp);
         break;
 
       case SDLK_LEFT:
-        changeDirection(snake, Snake::Direction::kLeft,
-                        Snake::Direction::kRight);
+        changeDirection(snake, SnakeDirection::kLeft,
+                        SnakeDirection::kRight);
         break;
 
       case SDLK_RIGHT:
-        changeDirection(snake, Snake::Direction::kRight,
-                        Snake::Direction::kLeft);
+        changeDirection(snake, SnakeDirection::kRight,
+                        SnakeDirection::kLeft);
         break;
       }
     }
