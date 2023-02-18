@@ -38,6 +38,7 @@ private:
 
   int _score{0};
 
+  void drawFood(Renderer &renderer);
   void placeFood();
   void update();
 };

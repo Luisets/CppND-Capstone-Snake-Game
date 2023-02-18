@@ -4,8 +4,9 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include "enums.h"
+#include "renderableObject.h"
 
-class Snake
+class Snake : public virtual RenderableObject
 {
 public:
   Snake(int grid_width, int grid_height);
@@ -17,6 +18,7 @@ public:
   void speedUp();
   bool snakeCell(int x, int y);
   void checkCollision(const std::vector<SDL_Point> &points);
+  void render(Renderer &renderer) override;
 
   inline SnakeDirection getDirection() const { return _direction; }
   inline float getHead_x() const { return _head_x; }

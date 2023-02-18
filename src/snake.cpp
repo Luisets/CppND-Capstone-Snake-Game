@@ -1,6 +1,9 @@
 #include "snake.h"
+#include "renderer.h"
 #include <cmath>
 #include <iostream>
+#include <tuple>
+#include <utility>
 
 Snake::Snake(int grid_width, int grid_height)
     : _grid_width(grid_width)
@@ -111,7 +114,7 @@ void Snake::checkCollision(const std::vector<SDL_Point> &points)
 {
   int cellHead_x = static_cast<int>(_head_x);
   int cellHead_y = static_cast<int>(_head_y);
-  for(auto &point : points)
+  for (auto &point : points)
   {
     if (cellHead_x == point.x && cellHead_y == point.y)
     {
@@ -119,6 +122,34 @@ void Snake::checkCollision(const std::vector<SDL_Point> &points)
       break;
     }
   }
+}
+
+void Snake::render(Renderer &renderer)
+{
+  SDL_Rect block;
+  std::tie(block.w, block.h) = renderer.getBlockDimentions();
+
+  // Render snake's body
+  renderer.setBrushColor(BrushColor::SnakeBody);
+  for (SDL_Point const &point : _body)
+  {
+    block.x = point.x * block.w;
+    block.y = point.y * block.h;
+    renderer.render(block);
+  }
+
+  // Render snake's head
+  block.x = static_cast<int>(_head_x) * block.w;
+  block.y = static_cast<int>(_head_y) * block.h;
+  if (isAlive())
+  {
+    renderer.setBrushColor(BrushColor::SnakeHeadAlive);
+  }
+  else
+  {
+    renderer.setBrushColor(BrushColor::SnakeHeadDead);
+  }
+  renderer.render(block);
 }
 
 void Snake::speedUp()

@@ -1,6 +1,7 @@
 #include "game.h"
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <tuple>
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : _snake(grid_width, grid_height)
@@ -31,12 +32,19 @@ void Game::run(Renderer &renderer,
   {
     frame_start = SDL_GetTicks();
 
-    // Input, Update, Render - the main game loop.
+    // Handle user input
     _controller.handleInput(running, _snake);
+
+    // update game state
     update();
-    renderer.render(_snake, _food);
+
+    // Update screen
+    renderer.cleanScreen();
+    drawFood(renderer);
+    _snake.render(renderer);
     _obstacle.render(renderer);
-  renderer.updateScreen();
+    renderer.updateScreen();
+
     frame_end = SDL_GetTicks();
 
     // Keep track of how long each loop through the input/update/render cycle
@@ -63,6 +71,17 @@ void Game::run(Renderer &renderer,
     running = _snake.isAlive();
   }
   renderer.hideScreen();
+}
+
+void Game::drawFood(Renderer &renderer)
+{
+  SDL_Rect block;
+  std::tie(block.w, block.h) = renderer.getBlockDimentions();
+
+  renderer.setBrushColor(BrushColor::Food);
+  block.x = _food.x * block.w;
+  block.y = _food.y * block.h;
+  renderer.render(block);
 }
 
 void Game::placeFood()

@@ -13,8 +13,8 @@ public:
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void render(Snake const snake, SDL_Point const &food);
   void updateWindowTitle(int score, int fps);
+  void cleanScreen();
   void updateScreen();
   void render(SDL_Rect &block);
   void setBrushColor(const BrushColor color);
