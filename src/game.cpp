@@ -6,7 +6,7 @@
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : _snake(grid_width, grid_height)
     , _obstacle(grid_width, grid_height)
-    , _scoreboard(Game::SCOREBOARD_PATH)
+    , _scoreboard(SCOREBOARD_PATH)
     , engine(dev())
     , random_w(0, static_cast<int>(grid_width - 1))
     , random_h(0, static_cast<int>(grid_height - 1))
