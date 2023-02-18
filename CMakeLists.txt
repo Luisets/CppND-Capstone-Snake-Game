@@ -24,4 +24,5 @@ set(PROJECT_SOURCES
 )
 
 add_executable(SnakeGame ${PROJECT_SOURCES})
+string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
 target_link_libraries(SnakeGame ${SDL2_LIBRARIES})
