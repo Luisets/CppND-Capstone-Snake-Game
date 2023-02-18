@@ -10,6 +10,8 @@
 #include <random>
 #include <string>
 
+#define SCOREBOARD_PATH "./scoreboard"
+
 class Game
 {
 public:
@@ -30,8 +32,6 @@ private:
   Scoreboard _scoreboard;
   Difficulty _difficulty;
   SDL_Point _food;
-
-  static constexpr char SCOREBOARD_PATH[] = "./scoreboard";
 
   std::random_device dev;
   std::mt19937 engine;
