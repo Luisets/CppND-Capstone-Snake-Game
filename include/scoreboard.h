@@ -4,6 +4,9 @@
 #include <array>
 #include <string>
 
+#define MAX_SCORES 5UL
+#define MAX_NICK_SIZE 10UL
+
 struct score_entry
 {
     char nickname[11];
@@ -19,8 +22,6 @@ public:
     void updateScoreboard(unsigned long newScore);
 
 private:
-    static constexpr size_t MAX_SCORES = 5;
-    static constexpr size_t MAX_NICK_SIZE = 10;
     std::array<score_entry, MAX_SCORES> _scores;
     size_t _scoresInScoreboard;
     std::string _filename;

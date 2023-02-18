@@ -1,6 +1,8 @@
 #ifndef GAMEMENU_H
 #define GAMEMENU_H
 
+#define N_GAME_OPTIONS 4
+
 enum class Option : unsigned int
 {
     Play = 1,
@@ -21,7 +23,6 @@ public:
 private:
     Game &_game;
     Renderer &_renderer;
-    const int N_OPTIONS = 4;
 
     void displayMenu();
     void launchGame();

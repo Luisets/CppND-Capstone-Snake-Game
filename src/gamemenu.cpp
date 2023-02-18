@@ -48,9 +48,9 @@ void GameMenu::displayMenu()
 Option GameMenu::getUserSelection()
 {
     int choice = 0;
-    while (choice < 1 || choice > N_OPTIONS)
+    while (choice < 1 || choice > N_GAME_OPTIONS)
     {
-        std::cout << "Enter your choice (1-" << N_OPTIONS << "): ";
+        std::cout << "Enter your choice (1-" << N_GAME_OPTIONS << "): ";
         std::cin >> choice;
     }
     std::cin.clear();
