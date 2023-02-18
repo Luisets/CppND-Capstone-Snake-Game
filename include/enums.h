@@ -17,4 +17,14 @@ enum class SnakeDirection
     kNone
 };
 
+enum class BrushColor
+{
+    SnakeHeadAlive,
+    SnakeHeadDead,
+    SnakeBody,
+    Food,
+    BackGround,
+    Obstacle
+};
+
 #endif

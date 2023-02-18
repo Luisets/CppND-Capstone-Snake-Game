@@ -16,6 +16,7 @@ public:
   void growBody();
   void speedUp();
   bool snakeCell(int x, int y);
+  void checkCollision(const std::vector<SDL_Point> &points);
 
   inline SnakeDirection getDirection() const { return _direction; }
   inline float getHead_x() const { return _head_x; }

@@ -1,11 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SDL2/SDL.h>
 #include "controller.h"
+#include "obstacle.h"
 #include "renderer.h"
 #include "scoreboard.h"
 #include "snake.h"
+#include <SDL2/SDL.h>
 #include <random>
 #include <string>
 
@@ -23,6 +24,7 @@ public:
 
 private:
   Snake _snake;
+  Obstacle _obstacle;
   Controller _controller;
   Scoreboard _scoreboard;
   SDL_Point _food;

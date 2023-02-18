@@ -85,14 +85,7 @@ void Snake::updateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell)
     _size++;
   }
 
-  // Check if the snake has died.
-  for (auto const &item : _body)
-  {
-    if (current_head_cell.x == item.x && current_head_cell.y == item.y)
-    {
-      _alive = false;
-    }
-  }
+  checkCollision(_body);
 }
 
 void Snake::growBody() { _growing = true; }
@@ -114,7 +107,21 @@ bool Snake::snakeCell(int x, int y)
   return false;
 }
 
+void Snake::checkCollision(const std::vector<SDL_Point> &points)
+{
+  int cellHead_x = static_cast<int>(_head_x);
+  int cellHead_y = static_cast<int>(_head_y);
+  for(auto &point : points)
+  {
+    if (cellHead_x == point.x && cellHead_y == point.y)
+    {
+      _alive = false;
+      break;
+    }
+  }
+}
+
 void Snake::speedUp()
 {
-  _speed += 0.2;
+  _speed += 0.02;
 }

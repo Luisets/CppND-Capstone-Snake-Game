@@ -85,6 +85,43 @@ void Renderer::render(Snake const snake, SDL_Point const &food)
   SDL_RenderPresent(_sdl_renderer);
 }
 
+void Renderer::render(SDL_Rect &block)
+{
+  SDL_RenderFillRect(_sdl_renderer, &block);
+}
+
+void Renderer::setBrushColor(const BrushColor color)
+{
+  switch (color)
+  {
+  case BrushColor::BackGround:
+    SDL_SetRenderDrawColor(_sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
+    break;
+  case BrushColor::Food:
+    SDL_SetRenderDrawColor(_sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF);
+    break;
+  case BrushColor::Obstacle:
+    SDL_SetRenderDrawColor(_sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    break;
+  case BrushColor::SnakeBody:
+    SDL_SetRenderDrawColor(_sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    break;
+  case BrushColor::SnakeHeadAlive:
+    SDL_SetRenderDrawColor(_sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
+    break;
+  case BrushColor::SnakeHeadDead:
+    SDL_SetRenderDrawColor(_sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+    break;
+  default:
+    break;
+  }
+}
+
+void Renderer::updateScreen()
+{
+  SDL_RenderPresent(_sdl_renderer);
+}
+
 void Renderer::updateWindowTitle(int score, int fps)
 {
   std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};

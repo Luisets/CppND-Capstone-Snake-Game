@@ -4,6 +4,7 @@
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : _snake(grid_width, grid_height)
+    , _obstacle(grid_width, grid_height)
     , _scoreboard(Game::SCOREBOARD_PATH)
     , engine(dev())
     , random_w(0, static_cast<int>(grid_width - 1))
@@ -34,7 +35,8 @@ void Game::run(Renderer &renderer,
     _controller.handleInput(running, _snake);
     update();
     renderer.render(_snake, _food);
-
+    _obstacle.render(renderer);
+  renderer.updateScreen();
     frame_end = SDL_GetTicks();
 
     // Keep track of how long each loop through the input/update/render cycle
@@ -87,6 +89,7 @@ void Game::update()
     return;
 
   _snake.update();
+  _snake.checkCollision(_obstacle.getPoints());
 
   int new_x = static_cast<int>(_snake.getHead_x());
   int new_y = static_cast<int>(_snake.getHead_y());
