@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "C/C++:build and debug",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/SnakeGame",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}/build",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "CMake: build",
+        "visualizerFile": "/home/luisets/.vscode-server/data/User/workspaceStorage/7791508e0bb52dd01f4d22ec68d963d6/tonka3000.qtvsctools/qt.natvis.xml"
+      }
+    ],
+    "sudo": true
+  }

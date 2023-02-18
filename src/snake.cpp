@@ -1,79 +1,158 @@
 #include "snake.h"
+#include "renderer.h"
 #include <cmath>
 #include <iostream>
+#include <tuple>
+#include <utility>
 
-void Snake::Update() {
+Snake::Snake(int grid_width, int grid_height)
+    : _grid_width(grid_width)
+    , _grid_height(grid_height)
+    , _head_x(grid_width / 2)
+    , _head_y(grid_height / 2)
+{
+}
+
+void Snake::initialize()
+{
+  _direction = SnakeDirection::kNone;
+  _head_x = _grid_width / 2;
+  _head_y = _grid_height / 2;
+  _speed = 0.1;
+  _size = 2;
+  _alive = true;
+  _body.clear();
+}
+
+void Snake::update()
+{
   SDL_Point prev_cell{
-      static_cast<int>(head_x),
+      static_cast<int>(_head_x),
       static_cast<int>(
-          head_y)};  // We first capture the head's cell before updating.
-  UpdateHead();
+          _head_y)}; // We first capture the head's cell before updating.
+  updateHead();
   SDL_Point current_cell{
-      static_cast<int>(head_x),
-      static_cast<int>(head_y)};  // Capture the head's cell after updating.
+      static_cast<int>(_head_x),
+      static_cast<int>(_head_y)}; // Capture the head's cell after updating.
 
-  // Update all of the body vector items if the snake head has moved to a new
+  // update all of the body vector items if the snake head has moved to a new
   // cell.
-  if (current_cell.x != prev_cell.x || current_cell.y != prev_cell.y) {
-    UpdateBody(current_cell, prev_cell);
+  if (current_cell.x != prev_cell.x || current_cell.y != prev_cell.y)
+  {
+    updateBody(current_cell, prev_cell);
   }
 }
 
-void Snake::UpdateHead() {
-  switch (direction) {
-    case Direction::kUp:
-      head_y -= speed;
-      break;
+void Snake::updateHead()
+{
+  switch (_direction)
+  {
+  case SnakeDirection::kUp:
+    _head_y -= _speed;
+    break;
 
-    case Direction::kDown:
-      head_y += speed;
-      break;
+  case SnakeDirection::kDown:
+    _head_y += _speed;
+    break;
 
-    case Direction::kLeft:
-      head_x -= speed;
-      break;
+  case SnakeDirection::kLeft:
+    _head_x -= _speed;
+    break;
 
-    case Direction::kRight:
-      head_x += speed;
-      break;
+  case SnakeDirection::kRight:
+    _head_x += _speed;
+    break;
+
+  case SnakeDirection::kNone:
+    break;
   }
 
   // Wrap the Snake around to the beginning if going off of the screen.
-  head_x = fmod(head_x + grid_width, grid_width);
-  head_y = fmod(head_y + grid_height, grid_height);
+  _head_x = fmod(_head_x + _grid_width, _grid_width);
+  _head_y = fmod(_head_y + _grid_height, _grid_height);
 }
 
-void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) {
+void Snake::updateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell)
+{
   // Add previous head location to vector
-  body.push_back(prev_head_cell);
+  _body.push_back(prev_head_cell);
 
-  if (!growing) {
+  if (!_growing)
+  {
     // Remove the tail from the vector.
-    body.erase(body.begin());
-  } else {
-    growing = false;
-    size++;
+    _body.erase(_body.begin());
+  }
+  else
+  {
+    _growing = false;
+    _size++;
   }
 
-  // Check if the snake has died.
-  for (auto const &item : body) {
-    if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
-      alive = false;
-    }
-  }
+  checkCollision(_body);
 }
 
-void Snake::GrowBody() { growing = true; }
+void Snake::growBody() { _growing = true; }
 
 // Inefficient method to check if cell is occupied by snake.
-bool Snake::SnakeCell(int x, int y) {
-  if (x == static_cast<int>(head_x) && y == static_cast<int>(head_y)) {
+bool Snake::snakeCell(int x, int y)
+{
+  if (x == static_cast<int>(_head_x) && y == static_cast<int>(_head_y))
+  {
     return true;
   }
-  for (auto const &item : body) {
-    if (x == item.x && y == item.y) {
+  for (auto const &item : _body)
+  {
+    if (x == item.x && y == item.y)
+    {
       return true;
     }
   }
   return false;
+}
+
+void Snake::checkCollision(const std::vector<SDL_Point> &points)
+{
+  int cellHead_x = static_cast<int>(_head_x);
+  int cellHead_y = static_cast<int>(_head_y);
+  for (auto &point : points)
+  {
+    if (cellHead_x == point.x && cellHead_y == point.y)
+    {
+      _alive = false;
+      break;
+    }
+  }
+}
+
+void Snake::draw(Renderer &renderer)
+{
+  SDL_Rect block;
+  std::tie(block.w, block.h) = renderer.getBlockDimentions();
+
+  // Render snake's body
+  renderer.setBrushColor(BrushColor::SnakeBody);
+  for (SDL_Point const &point : _body)
+  {
+    block.x = point.x * block.w;
+    block.y = point.y * block.h;
+    renderer.drawBlock(block);
+  }
+
+  // Render snake's head
+  block.x = static_cast<int>(_head_x) * block.w;
+  block.y = static_cast<int>(_head_y) * block.h;
+  if (isAlive())
+  {
+    renderer.setBrushColor(BrushColor::SnakeHeadAlive);
+  }
+  else
+  {
+    renderer.setBrushColor(BrushColor::SnakeHeadDead);
+  }
+  renderer.drawBlock(block);
+}
+
+void Snake::speedUp()
+{
+  _speed = std::min(_speed + 0.02F, SPEED_LIMIT);
 }
