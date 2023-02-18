@@ -45,3 +45,15 @@ void Obstacle::loadObstacles(Difficulty difficulty)
         _coordinates.emplace_back(coordinate);
     }
 }
+
+bool Obstacle::checkCell(int x, int y)
+{
+  for (auto const &point : _coordinates)
+  {
+    if (x == point.x && y == point.y)
+    {
+      return true;
+    }
+  }
+  return false;
+}

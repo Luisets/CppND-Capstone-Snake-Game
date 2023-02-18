@@ -101,7 +101,7 @@ void Game::placeFood()
     y = random_h(engine);
     // Check that the location is not occupied by a snake item before placing
     // food.
-    if (!_snake.snakeCell(x, y))
+    if (!_snake.snakeCell(x, y) && !_obstacle.checkCell(x, y))
     {
       _food.x = x;
       _food.y = y;

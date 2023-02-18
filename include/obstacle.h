@@ -13,6 +13,7 @@ public:
     Obstacle(int grid_width, int grid_height);
     void draw(Renderer &renderer) override;
     void loadObstacles(Difficulty difficulty);
+    bool checkCell(int x, int y);
 
     const std::vector<SDL_Point> &getPoints() const { return _coordinates; };
 
